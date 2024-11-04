@@ -910,7 +910,6 @@ Constraint already exists: Constraint( id=7, name='book_title_year', type='UNIQU
 === Constraints and indexes
 
 * xref:constraints/managing-constraints.adoc#constraints-and-backing-indexes[]
-* xref:constraints/managing-constraints.adoc#create-constraint-with-index-provider[]
 * xref:constraints/managing-constraints.adoc#constraint-failures-and-indexes[]
 
 [[constraints-and-backing-indexes]]
@@ -993,60 +992,6 @@ SHOW INDEXES WHERE owningConstraint IS NOT NULL
 
 [NOTE]
 Property existence and property type constraints are not backed by indexes.
-
-[[create-constraint-with-index-provider]]
-==== Creating constraints with an index provider
-
-Because property uniqueness and key constraints have backing indexes, an index provider can be provided when creating these constraints using the `OPTIONS` clause and the `indexProvider` option.
-
-The only valid value for the index provider is:
-
-* `range-1.0` label:default[]
-
-
-.Create a node key constraint with a specified index provider
-======
-
-.Create a constraint requiring `Actor` nodes to have a unique `surname` property as a node key, specifying `range-1.0` as index provider
-[source, cypher]
-----
-CREATE CONSTRAINT constraint_with_provider
-FOR (actor:Actor) REQUIRE actor.surname IS NODE KEY
-OPTIONS {
-  indexProvider: 'range-1.0'
-}
-----
-
-.Result
-[source, queryresult]
-----
-Added 1 constraint.
-----
-
-======
-
-.Create a relationship property uniqueness constraint with a specified index provider
-======
-
-.Create a constraint requiring `SEQUEL_OF` relationships to have a unique combination of `order`, `seriesTitle`, and `number` properties, specifying `range-1.0` as index provider
-[source, cypher]
-----
-CREATE CONSTRAINT rel_constraint_with_options
-FOR ()-[sequel:SEQUEL_OF]-() REQUIRE (sequel.order, sequel.seriesTitle, sequel.number) IS UNIQUE
-OPTIONS {
-  indexProvider: 'range-1.0'
-}
-----
-
-.Result
-[source, queryresult]
-----
-Added 1 constraint.
-----
-
-======
-
-There are no valid index configuration values for the constraint-backing range indexes.
 
 [[constraint-failures-and-indexes]]
 ==== Constraint failures and indexes
