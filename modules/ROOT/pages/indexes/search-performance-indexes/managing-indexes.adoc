@@ -214,6 +214,7 @@ As of Neo4j 5.17, an informational notification is instead returned.
 Creating a text index can be done with the `CREATE TEXT INDEX` command.
 Note that the index name must be unique.
 
+Text indexes have no supported index configuration.
 
 [[text-indexes-supported-predicates]]
 [discrete]
