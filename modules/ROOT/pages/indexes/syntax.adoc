@@ -27,7 +27,7 @@ As of Neo4j 5.17, an informational notification is instead returned showing the 
 The index name must be unique among both indexes and constraints.
 A random name will be assigned if no name is explicitly given when an index is created.
 
-Configuration settings can be specified using the `OPTIONS` clause.
+Index configuration settings can be specified using the `OPTIONS` clause.
 However, not all indexes have available configuration settings.
 In those cases, nothing needs to be specified and the `OPTIONS` map should be omitted from the query.
 
@@ -38,7 +38,7 @@ Creating an index requires link:{neo4j-docs-base-uri}/operations-manual/{page-ve
 === Range indexes
 
 Range indexes have no supported index configuration.
-The `OPTIONS` map has been omitted from the syntax below.
+The `OPTIONS` map has, therefore, been omitted from the syntax below.
 
 .Create a range index for a node label, either on a single property or composite
 [source,syntax]
@@ -67,13 +67,15 @@ For more information, see xref:indexes/search-performance-indexes/managing-index
 [[create-text-index]]
 === Text indexes
 
+Text indexes have no supported index configuration.
+The `OPTIONS` map has, therefore, been omitted from the syntax below.
+
 .Create a text index for a node label on a single property
 [source,syntax]
 ----
 CREATE TEXT INDEX [index_name] [IF NOT EXISTS]
 FOR (n:LabelName) 
 ON (n.propertyName_1)
-[OPTIONS “{“ option: value[, …] “}”]
 ----
 
 .Create a text index for a relationship type on a single property
@@ -82,10 +84,7 @@ ON (n.propertyName_1)
 CREATE TEXT INDEX [index_name] [IF NOT EXISTS]
 FOR ()-”[“r:TYPE_NAME”]”-() 
 ON (r.propertyName_1)
-[OPTIONS “{“ option: value[, …] “}”]
 ----
-
-Text indexes have no supported index configuration and, as of Neo4j 5.1, they have two index providers available, `text-2.0` (default) and `text-1.0` (deprecated).
 
 [NOTE]
 It is not possible to create composite text indexes on multiple properties.
@@ -133,7 +132,7 @@ For more information, see xref:indexes/search-performance-indexes/managing-index
 === Token lookup indexes
 
 Token lookup indexes have no supported index configuration.
-The `OPTIONS` map has been omitted from the syntax below.
+The `OPTIONS` map has, therefore, been omitted from the syntax below.
 
 .Create a node label lookup index
 [source,syntax]
@@ -204,9 +203,6 @@ FOR ()-”[“r:TYPE_NAME”]”-()
 ON (r.propertyName)
 [OPTIONS “{“ option: value[, …] “}”]
 ----
-
-As of Neo4j 5.18, vector indexes have two vector index providers available, `vector-2.0` (default) and `vector-1.0` (deprecated).
-For more information, see xref:indexes/semantic-indexes/vector-indexes.adoc#vector-index-providers[Vector index providers for compatibility].
 
 For a full list of all vector index settings, see xref:indexes/semantic-indexes/vector-indexes.adoc#configuration-settings[Vector index configuration settings].
 Note that the `OPTIONS` clause was mandatory prior to Neo4j 5.23 because it was necessary to configure the `vector.dimensions` and `vector.similarity_function` settings when creating a vector index.

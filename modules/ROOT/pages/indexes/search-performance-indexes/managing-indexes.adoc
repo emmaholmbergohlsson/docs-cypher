@@ -33,8 +33,7 @@ If `IF NOT EXISTS` is appended to the command, no error is thrown and nothing ha
 It may still throw an error if conflicting constraints exist, such as constraints with the same name or schema and backing index type.
 As of Neo4j 5.17, an informational notification is instead returned showing the existing index which blocks the creation.
 
-Configuration settings can be specified using the `OPTIONS` clause.
-
+Index configuration settings can be specified using the `OPTIONS` clause.
 However, not all indexes have available configuration settings.
 In those cases, nothing needs to be specified and the `OPTIONS` map should be omitted from the query.
 
@@ -215,7 +214,6 @@ As of Neo4j 5.17, an informational notification is instead returned.
 Creating a text index can be done with the `CREATE TEXT INDEX` command.
 Note that the index name must be unique.
 
-Text indexes have no supported index configuration and, as of Neo4j 5.1, they have two index providers available, `text-2.0` (default) and `text-1.0` (deprecated).
 
 [[text-indexes-supported-predicates]]
 [discrete]
